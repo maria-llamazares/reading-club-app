@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { searchBooks } from '../services/bookService'
+import CreateClubModal from './CreateClubModal'
 import './BookSearch.css'
 
 function BookSearch() {
     const [query, setQuery] = useState('')
     const [books, setBooks] = useState([])
     const [loading, setLoading] = useState(false)
+    const [selectedBook, setSelectedBook] = useState(null)
 
     const handleSearch = async (e) => {
         const value = e.target.value
@@ -55,11 +57,24 @@ function BookSearch() {
                                     {book.description.slice(0, 300)}...
                                 </p>
                             )}
-                            <button className="book-btn">Crear club</button>
+                            <button className="book-btn" onClick={() => setSelectedBook(book)}>
+                                Crear club
+                            </button>
                         </div>
                     </div>
                 ))}
             </div>
+
+            {selectedBook && (
+                <CreateClubModal
+                    book={selectedBook}
+                    onClose={() => setSelectedBook(null)}
+                    onCreated={(club) => {
+                        console.log('Club creado:', club)
+                        setSelectedBook(null)
+                    }}
+                />
+            )}
         </div>
     )
 }

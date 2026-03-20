@@ -3,6 +3,7 @@ package com.maria.reading_club_app.service;
 
 import com.maria.reading_club_app.client.GoogleBooksResponse;
 import com.maria.reading_club_app.dto.BookDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
